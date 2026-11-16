@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Chess Move Input",
+  "name": "TextToMove",
   "version": "1.0.0",
   "description": "Enter chess moves using text instead of dragging pieces.",
   "content_scripts": [
@@ -10,6 +10,9 @@
       ],
       "js": [
         "dist/content.js"
+      ],
+      "css": [
+        "src/style.css"
       ],
       "run_at": "document_idle"
     }

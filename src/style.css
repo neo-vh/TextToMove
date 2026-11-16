@@ -1,0 +1,47 @@
+
+#chess-input {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999999;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    padding: 12px;
+    background-color: #262421;
+    border: 1px solid #45433f;
+    border-radius: 10px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+#chess-input input {
+    padding: 10px;
+    width: 160px;
+
+    border: 1px solid #666;
+    border-radius: 6px;
+
+    background-color: #fff;
+    color: #222;
+    outline: none;
+}
+
+#chess-input button {
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #81b64c;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#chess-input button:hover {
+    background-color: #6f9e3e;
+}

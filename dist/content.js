@@ -3457,7 +3457,29 @@
 
   // src/content.js
   var game = new Chess();
-  console.log(game.fen());
+  var currentMove = new String();
+  console.log("Current game FEN: ", game.fen());
+  console.log("Extension Loaded!");
+  var chessContainer = document.createElement("div");
+  chessContainer.id = "chess-input";
+  var moveInput = document.createElement("input");
+  moveInput.type = "text";
+  moveInput.placeholder = "Enter your Move..";
+  var submit = document.createElement("button");
+  submit.textContent = "Submit";
+  chessContainer.append(moveInput);
+  chessContainer.append(submit);
+  document.body.appendChild(chessContainer);
+  submit.addEventListener("click", () => {
+    console.log("Move Attempted: ", moveInput.value);
+    try {
+      currentMove = moveInput.value.trim();
+      game.move(currentMove);
+      console.log("Legal Move");
+    } catch (error) {
+      console.log("Illegal Move");
+    }
+  });
 })();
 /*! Bundled license information:
 
