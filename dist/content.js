@@ -3457,7 +3457,7 @@
 
   // src/content.js
   var game = new Chess();
-  var currentMove = new String();
+  var currentMove = "";
   console.log("Current game FEN: ", game.fen());
   console.log("Extension Loaded!");
   var chessContainer = document.createElement("div");
@@ -3465,10 +3465,29 @@
   var moveInput = document.createElement("input");
   moveInput.type = "text";
   moveInput.placeholder = "Enter your Move..";
+  var customCorrections = document.createElement("div");
+  customCorrections.id = "correctionsContainer";
+  moveInput.addEventListener("input", () => {
+    const legalMoves = game.moves();
+    const filteredMoves = legalMoves.filter(
+      (move) => move.toLowerCase().startsWith(moveInput.value.toLowerCase())
+    );
+    customCorrections.innerHTML = "";
+    if (moveInput.value.trim() == "") return;
+    filteredMoves.forEach((move) => {
+      const suggestion = document.createElement("button");
+      suggestion.textContent = move;
+      suggestion.addEventListener("click", () => {
+        moveInput.value = suggestion.textContent;
+      });
+      customCorrections.appendChild(suggestion);
+    });
+  });
   var submit = document.createElement("button");
   submit.textContent = "Submit";
   chessContainer.append(moveInput);
   chessContainer.append(submit);
+  chessContainer.append(customCorrections);
   document.body.appendChild(chessContainer);
   submit.addEventListener("click", () => {
     console.log("Move Attempted: ", moveInput.value);
@@ -3479,6 +3498,8 @@
     } catch (error) {
       console.log("Illegal Move");
     }
+    moveInput.value = "";
+    customCorrections.innerHTML = "";
   });
 })();
 /*! Bundled license information:
