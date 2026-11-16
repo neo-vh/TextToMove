@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Chess Move Input",
+  "version": "1.0.0",
+  "description": "Enter chess moves using text instead of dragging pieces.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.chess.com/*"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
