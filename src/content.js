@@ -63,9 +63,11 @@ submit.addEventListener("click", () => {
     } catch (error) {
         console.log("Illegal Move");
 
-        submit.style.backgroundColor = "#81b64c";
-        submit.style.color = "white";
-        submit.style.borderRadius = "6px";
+        submit.classList.add("error"); // set it to error style
+
+        setTimeout(() => {
+            submit.classList.remove("error");
+        }, 400);
     }
 
     moveInput.value = "";

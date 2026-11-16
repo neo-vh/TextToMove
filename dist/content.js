@@ -3459,7 +3459,6 @@
   var game = new Chess();
   var currentMove = "";
   console.log("Current game FEN: ", game.fen());
-  console.log("Extension Loaded!");
   var chessContainer = document.createElement("div");
   chessContainer.id = "chess-input";
   var moveInput = document.createElement("input");
@@ -3497,6 +3496,10 @@
       console.log("Legal Move");
     } catch (error) {
       console.log("Illegal Move");
+      submit.classList.add("error");
+      setTimeout(() => {
+        submit.classList.remove("error");
+      }, 400);
     }
     moveInput.value = "";
     customCorrections.innerHTML = "";
