@@ -3459,8 +3459,31 @@
   var game = new Chess();
   var currentMove = "";
   console.log("Current game FEN: ", game.fen());
+  function toggleVisible(e) {
+    if (!(e instanceof HTMLElement)) {
+      console.log("Unable to take given element for toggling");
+      return;
+    }
+    if (e.style.display === "none") {
+      e.style.display = "grid";
+      hideButton.textContent = "Hide";
+    } else {
+      e.style.display = "none";
+      hideButton.textContent = "Show";
+    }
+  }
+  var extensionContainer = document.createElement("div");
+  extensionContainer.id = "main-container";
+  var visibilityControls = document.createElement("div");
+  visibilityControls.id = "vis-Controls";
   var chessContainer = document.createElement("div");
   chessContainer.id = "chess-input";
+  var hideButton = document.createElement("button");
+  hideButton.id = "hide-button";
+  hideButton.textContent = "Hide";
+  hideButton.addEventListener("click", () => {
+    toggleVisible(chessContainer);
+  });
   var moveInput = document.createElement("input");
   moveInput.type = "text";
   moveInput.placeholder = "Enter your Move..";
@@ -3484,22 +3507,32 @@
   });
   var submit = document.createElement("button");
   submit.textContent = "Submit";
+  submit.id = "Submit-Button";
+  visibilityControls.append(hideButton);
   chessContainer.append(moveInput);
   chessContainer.append(submit);
   chessContainer.append(customCorrections);
-  document.body.appendChild(chessContainer);
+  extensionContainer.append(visibilityControls);
+  extensionContainer.append(chessContainer);
+  document.body.appendChild(extensionContainer);
   submit.addEventListener("click", () => {
     console.log("Move Attempted: ", moveInput.value);
     try {
       currentMove = moveInput.value.trim();
       game.move(currentMove);
       console.log("Legal Move");
+      submit.classList.add("success");
+      submit.textContent = "\u2713";
+      setTimeout(() => {
+        submit.classList.remove("success");
+        submit.textContent = "Submit";
+      }, 700);
     } catch (error) {
       console.log("Illegal Move");
       submit.classList.add("error");
       setTimeout(() => {
         submit.classList.remove("error");
-      }, 400);
+      }, 1e3);
     }
     moveInput.value = "";
     customCorrections.innerHTML = "";
